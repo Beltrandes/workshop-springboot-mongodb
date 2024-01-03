@@ -28,6 +28,13 @@ public class UserService {
         return userMapper.toDTO(userRepository.insert(userMapper.toEntity(dto)));
     }
 
+    public UserDTO update(String id, UserDTO dto) {
+        var obj = userMapper.toEntity(findById(id));
+        obj.setName(dto.name());
+        obj.setEmail(dto.email());
+        return userMapper.toDTO(userRepository.save(obj));
+    }
+
     public void delete(String id) {
         findById(id);
         userRepository.deleteById(id);
