@@ -27,4 +27,9 @@ public class UserService {
     public UserDTO insert(UserDTO dto) {
         return userMapper.toDTO(userRepository.insert(userMapper.toEntity(dto)));
     }
+
+    public void delete(String id) {
+        findById(id);
+        userRepository.deleteById(id);
+    }
 }
