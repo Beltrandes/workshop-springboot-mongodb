@@ -19,6 +19,13 @@ public class User {
     public User() {
     }
 
+    public User(String id, String name, String email, List<Post> posts) {
+        this.id = id;
+        this.name = name;
+        this.email = email;
+        this.posts = posts;
+    }
+
     public User(String id, String name, String email) {
         this.id = id;
         this.name = name;

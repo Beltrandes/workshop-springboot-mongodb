@@ -1,5 +1,6 @@
 package com.beltrandes.springboot_mongodb.resources;
 
+import com.beltrandes.springboot_mongodb.domain.Post;
 import com.beltrandes.springboot_mongodb.dto.UserDTO;
 import com.beltrandes.springboot_mongodb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,4 +46,9 @@ public class UserResource {
         return ResponseEntity.noContent().build();
     }
 
+    @GetMapping("/{id}/posts")
+    public ResponseEntity<List<Post>> findPosts(@PathVariable String id) {
+        var obj = userService.findById(id);
+        return ResponseEntity.ok().body(obj.posts());
+    }
 }
