@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 public class PostMapper {
 
     public PostDTO toDTO(Post post) {
-        return new PostDTO(post.getId(), post.getDate(), post.getTitle(), post.getBody(), post.getAuthor());
+        return new PostDTO(post.getId(), post.getDate(), post.getTitle(), post.getBody(), post.getAuthor(), post.getComments());
     }
 
     public Post toEntity(PostDTO dto) {
@@ -19,6 +19,7 @@ public class PostMapper {
         post.setTitle(dto.title());
         post.setBody(dto.body());
         post.setAuthor(dto.author());
+        post.setComments(dto.comments());
         return post;
     }
 }
