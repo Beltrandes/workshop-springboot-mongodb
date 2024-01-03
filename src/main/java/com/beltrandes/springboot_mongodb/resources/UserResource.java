@@ -3,11 +3,10 @@ package com.beltrandes.springboot_mongodb.resources;
 import com.beltrandes.springboot_mongodb.dto.UserDTO;
 import com.beltrandes.springboot_mongodb.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.util.List;
 
@@ -25,5 +24,12 @@ public class UserResource {
     @GetMapping("/{id}")
     public ResponseEntity<UserDTO> findById(@PathVariable String id) {
         return ResponseEntity.ok().body(userService.findById(id));
+    }
+
+    @PostMapping
+    public ResponseEntity<UserDTO> insert(@RequestBody UserDTO user) {
+        user = userService.insert(user);
+        var uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.id()).toUri();
+        return ResponseEntity.created(uri).build();
     }
 }

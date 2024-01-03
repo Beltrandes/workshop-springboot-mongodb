@@ -23,4 +23,8 @@ public class UserService {
     public UserDTO findById(String id) {
         return userMapper.toDTO(userRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Object not found. Id: " + id)));
     }
+
+    public UserDTO insert(UserDTO dto) {
+        return userMapper.toDTO(userRepository.insert(userMapper.toEntity(dto)));
+    }
 }
