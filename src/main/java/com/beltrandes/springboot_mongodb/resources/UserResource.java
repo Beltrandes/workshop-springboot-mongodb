@@ -1,7 +1,10 @@
 package com.beltrandes.springboot_mongodb.resources;
 
 import com.beltrandes.springboot_mongodb.domain.User;
+import com.beltrandes.springboot_mongodb.dto.UserDTO;
+import com.beltrandes.springboot_mongodb.repositories.UserRepository;
 import com.beltrandes.springboot_mongodb.services.UserService;
+import com.beltrandes.springboot_mongodb.utils.mappers.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,8 +21,7 @@ public class UserResource {
     @Autowired
     private UserService service;
     @GetMapping
-    public ResponseEntity<List<User>> findAll() {
-        var list = service.findAll();
-        return ResponseEntity.ok().body(list);
+    public ResponseEntity<List<UserDTO>> findAll() {
+        return ResponseEntity.ok().body(service.findAll());
     }
 }
