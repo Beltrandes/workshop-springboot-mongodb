@@ -7,6 +7,7 @@ import com.beltrandes.springboot_mongodb.utils.mappers.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Date;
 import java.util.List;
 
 @Service
@@ -23,5 +24,10 @@ public class PostService {
 
     public List<PostDTO> findByTitle(String text) {
         return postRepository.searchTitle(text).stream().map(postMapper::toDTO).toList();
+    }
+
+    public List<PostDTO> fullSearch(String text, Date minDate, Date maxDate) {
+        maxDate = new Date(maxDate.getTime() + 24 * 60 * 60 * 1000);
+        return postRepository.fullSearch(text, minDate, maxDate).stream().map(postMapper::toDTO).toList();
     }
 }
