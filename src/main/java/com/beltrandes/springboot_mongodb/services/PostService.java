@@ -7,6 +7,8 @@ import com.beltrandes.springboot_mongodb.utils.mappers.PostMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class PostService {
 
@@ -17,5 +19,9 @@ public class PostService {
 
     public PostDTO findById(String id) {
         return postMapper.toDTO(postRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Object not found. Id: " + id)));
+    }
+
+    public List<PostDTO> findByTitle(String text) {
+        return postRepository.findByTitleContainingIgnoreCase(text).stream().map(postMapper::toDTO).toList();
     }
 }
